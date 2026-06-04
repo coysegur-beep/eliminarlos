@@ -1,0 +1,55 @@
+---
+import { SITE, SERVICIOS } from '@/lib/config';
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink text-white/60 pt-20">
+  <div class="container-wide">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr] gap-12 pb-14 border-b border-white/[0.07]">
+      <div>
+        <a href="/" class="font-serif font-medium text-[24px] text-white tracking-tight mb-5 block">
+          <span class="text-brand-accent">e</span>liminarlos
+        </a>
+        <p class="text-[14.5px] leading-7 mb-6 max-w-[280px]">
+          Eliminamos tu información de Google e internet con métodos 100% legales y garantía de confidencialidad.
+        </p>
+        <div class="space-y-2.5 text-[13.5px]">
+          <div><a href={SITE.contact.phoneHref} class="hover:text-brand-accent transition-colors">{SITE.contact.phone}</a></div>
+          <div><a href={`mailto:${SITE.contact.email}`} class="hover:text-brand-accent transition-colors">{SITE.contact.email}</a></div>
+        </div>
+      </div>
+
+      <div>
+        <h5 class="text-white text-[12px] uppercase tracking-[0.12em] mb-5 font-semibold font-sans">Servicios</h5>
+        <ul class="list-none space-y-3">
+          {SERVICIOS.map((s) => (
+            <li><a href={`/servicios/${s.slug}`} class="text-white/55 hover:text-brand-accent transition-colors text-[14px]">{s.nombre}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white text-[12px] uppercase tracking-[0.12em] mb-5 font-semibold font-sans">Empresa</h5>
+        <ul class="list-none space-y-3">
+          <li><a href="/nosotros" class="text-white/55 hover:text-brand-accent transition-colors text-[14px]">Quiénes somos</a></li>
+          <li><a href="/blog" class="text-white/55 hover:text-brand-accent transition-colors text-[14px]">Blog</a></li>
+          <li><a href="/contacto" class="text-white/55 hover:text-brand-accent transition-colors text-[14px]">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white text-[12px] uppercase tracking-[0.12em] mb-5 font-semibold font-sans">Legal</h5>
+        <ul class="list-none space-y-3">
+          <li><a href="/legal/privacidad" class="text-white/55 hover:text-brand-accent transition-colors text-[14px]">Política de privacidad</a></li>
+          <li><a href="/legal/cookies" class="text-white/55 hover:text-brand-accent transition-colors text-[14px]">Política de cookies</a></li>
+          <li><a href="/legal/aviso" class="text-white/55 hover:text-brand-accent transition-colors text-[14px]">Aviso legal</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="py-6 flex justify-between flex-wrap gap-3 text-[12.5px] text-white/35">
+      <span>© {year} {SITE.name} · Todos los derechos reservados</span>
+      <span>Derecho al olvido · RGPD · Privacidad digital</span>
+    </div>
+  </div>
+</footer>

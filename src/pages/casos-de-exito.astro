@@ -1,0 +1,153 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopBar from '@/components/TopBar.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+
+const casos = [
+  {
+    n: '01',
+    cat: 'Directivo',
+    titulo: 'Eliminación de noticia negativa de directivo financiero',
+    reto: 'Un directivo de banca aparecía en primera página de Google asociado a una noticia de hace 7 años sobre un proceso judicial del que fue absuelto. La noticia seguía apareciendo en búsquedas por su nombre y cargo.',
+    solucion: 'Ejercimos el derecho al olvido ante Google con argumentación basada en el RGPD: información desactualizada, proceso concluido con absolución y ausencia de interés público vigente.',
+    resultado: 'La URL fue retirada de los resultados de Google en 23 días. El directivo recuperó el control de su primera página de búsqueda.',
+    tiempo: '23 días',
+    tipo: 'Derecho al olvido',
+  },
+  {
+    n: '02',
+    cat: 'Empresa',
+    titulo: 'Campaña de reseñas falsas contra restaurante',
+    reto: 'Un restaurante recibió en una semana más de 40 reseñas negativas de 1 estrella en Google Maps, todas de perfiles sin historial. La valoración bajó de 4.7 a 3.1 estrellas.',
+    solucion: 'Identificamos el patrón coordinado, documentamos las evidencias de manipulación y presentamos una denuncia masiva ante Google con pruebas de comportamiento inorgánico.',
+    resultado: '34 de las 40 reseñas fueron eliminadas por Google. La valoración se recuperó a 4.5 estrellas en 2 semanas.',
+    tiempo: '14 días',
+    tipo: 'Reseñas negativas',
+  },
+  {
+    n: '03',
+    cat: 'Particular',
+    titulo: 'Eliminación de fotos íntimas publicadas sin consentimiento',
+    reto: 'Una persona descubrió que fotografías íntimas suyas habían sido publicadas en varios sitios web sin su consentimiento. Las imágenes aparecían en Google Imágenes al buscar su nombre.',
+    solucion: 'Actuamos con urgencia: solicitudes DMCA a cada plataforma, reporte de contenido íntimo no consensuado ante Google y contacto con los webmasters de las webs implicadas.',
+    resultado: 'Todas las imágenes retiradas en 6 días. Desindexadas de Google Imágenes en 10 días.',
+    tiempo: '10 días',
+    tipo: 'Eliminación de fotos',
+  },
+  {
+    n: '04',
+    cat: 'Empresa',
+    titulo: 'Desposicionamiento de noticias negativas para marca de alimentación',
+    reto: 'Una empresa del sector alimentación tenía en primera página de Google tres noticias negativas de una crisis de hace 4 años. El contenido era veraz y no podía eliminarse legalmente.',
+    solucion: 'Diseñamos una estrategia de desposicionamiento: creación de activos digitales propios (blog, perfiles institucionales, notas de prensa), optimización SEO de la web corporativa y construcción de autoridad de marca.',
+    resultado: 'En 90 días las tres noticias negativas pasaron de posiciones 3–5 a posiciones 8–12. En 6 meses ya no eran visibles en primera página.',
+    tiempo: '6 meses',
+    tipo: 'Desposicionamiento',
+  },
+  {
+    n: '05',
+    cat: 'Particular',
+    titulo: 'Borrado de datos personales en directorios online',
+    reto: 'Al buscar el nombre de una profesional autónoma aparecían su dirección particular, teléfono personal y datos familiares en más de 15 directorios y agregadores de datos.',
+    solucion: 'Realizamos una auditoría completa de su huella digital, identificamos todas las fuentes y enviamos solicitudes de supresión fundamentadas en el RGPD a cada plataforma.',
+    resultado: 'Datos eliminados de 13 de los 15 directorios en 30 días. Los 2 restantes desindexados de Google.',
+    tiempo: '30 días',
+    tipo: 'Borrar huella digital',
+  },
+  {
+    n: '06',
+    cat: 'Directivo',
+    titulo: 'Gestión de crisis reputacional para fundador de startup',
+    reto: 'Un artículo viral en LinkedIn con acusaciones infundadas contra el fundador de una startup acumuló miles de interacciones y empezó a aparecer en primera página de Google al buscar su nombre.',
+    solucion: 'Actuación simultánea: solicitud de retirada al autor, denuncia ante LinkedIn por información falsa, y estrategia de desposicionamiento con contenido de autoridad del fundador.',
+    resultado: 'El post fue eliminado en 4 días. En 45 días la primera página de Google para su nombre estaba dominada por contenido positivo y neutral.',
+    tiempo: '45 días',
+    tipo: 'Crisis reputacional',
+  },
+];
+---
+
+<BaseLayout
+  title="Casos de éxito — Eliminación de contenido y reputación online"
+  description="Casos reales de eliminación de noticias, fotos, reseñas y datos personales de Google. Derecho al olvido, crisis reputacionales y desposicionamiento web."
+>
+  <TopBar />
+  <Header />
+
+  <section class="bg-ink text-white" style="padding: 110px 0 80px;">
+    <div class="container-wide">
+      <div class="eyebrow">Casos de éxito</div>
+      <h1 class="font-serif font-normal text-white max-w-[680px]" style="font-size: clamp(36px, 5vw, 60px); line-height: 1.1;">
+        Resultados reales.<br/><span class="italic text-brand-accent">Casos resueltos.</span>
+      </h1>
+      <p class="mt-5 text-[16px] max-w-[500px]" style="color: rgba(255,255,255,0.6);">
+        Casos anónimos de personas y empresas que recuperaron el control de su reputación digital.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-surface" style="padding: 80px 0 110px;">
+    <div class="container-wide">
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        {[
+          { n: '+500', label: 'Casos resueltos' },
+          { n: '98%', label: 'Tasa de éxito' },
+          { n: '23 días', label: 'Tiempo medio de resolución' },
+          { n: '100%', label: 'Métodos legales' },
+        ].map((s) => (
+          <div class="bg-white border border-ink/[0.07] rounded-xl p-6 text-center">
+            <div class="font-serif text-[38px] font-medium text-brand leading-none mb-1">{s.n}</div>
+            <div class="text-[12px] text-ink-muted uppercase tracking-[0.08em]">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Casos -->
+      <div class="space-y-6">
+        {casos.map((caso) => (
+          <div class="bg-white border border-ink/[0.07] rounded-xl overflow-hidden">
+            <div class="grid md:grid-cols-[1fr_200px]">
+              <div class="p-8 md:p-10">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="bg-brand-accent/10 text-brand text-[11px] font-semibold uppercase tracking-[0.1em] px-3 py-1 rounded-full">{caso.tipo}</span>
+                  <span class="bg-ink/5 text-ink-muted text-[11px] font-semibold uppercase tracking-[0.1em] px-3 py-1 rounded-full">{caso.cat}</span>
+                </div>
+                <h2 class="font-serif text-[22px] text-ink mb-5 leading-[1.25]">{caso.titulo}</h2>
+                <div class="space-y-4 text-[14.5px]">
+                  <div>
+                    <span class="font-semibold text-ink block mb-1">El reto</span>
+                    <p class="text-ink-muted leading-[1.7]">{caso.reto}</p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-ink block mb-1">La solución</span>
+                    <p class="text-ink-muted leading-[1.7]">{caso.solucion}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-brand-accent/5 border-l border-ink/[0.07] p-8 flex flex-col justify-center items-center text-center">
+                <div class="text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-muted mb-3">Resultado</div>
+                <div class="font-serif text-[15px] text-ink leading-[1.5] mb-5">{caso.resultado}</div>
+                <div class="w-px h-6 bg-ink/10 mb-5"></div>
+                <div class="text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-muted mb-1">Tiempo</div>
+                <div class="font-serif text-[28px] text-brand font-medium">{caso.tiempo}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-14 bg-ink text-white rounded-xl p-12 text-center">
+        <h3 class="font-serif text-[28px] mb-3">¿Tu caso podría ser el siguiente?</h3>
+        <p class="text-[15px] mb-7 max-w-[400px] mx-auto" style="color: rgba(255,255,255,0.6);">Análisis gratuito, confidencial y sin compromiso.</p>
+        <a href="/contacto" class="btn btn-primary">Analizar mi caso gratis</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+  <WhatsAppFloat />
+</BaseLayout>

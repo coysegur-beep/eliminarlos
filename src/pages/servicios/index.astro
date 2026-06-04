@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopBar from '@/components/TopBar.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+import { SERVICIOS } from '@/lib/config';
+
+const eliminacion = SERVICIOS.filter((s) => s.grupo === 'eliminacion');
+const reputacion  = SERVICIOS.filter((s) => s.grupo === 'reputacion');
+---
+
+<BaseLayout
+  title="Servicios de eliminación y reputación online"
+  description="Eliminamos URLs, fotos, vídeos, noticias y datos personales de Google. Gestión de reputación online, derecho al olvido y crisis digitales. Consulta gratis."
+>
+  <TopBar />
+  <Header />
+
+  <section class="bg-ink text-white" style="padding: 110px 0 80px;">
+    <div class="container-wide">
+      <div class="eyebrow">Servicios</div>
+      <h1 class="font-serif font-normal text-white max-w-[700px]" style="font-size: clamp(38px, 5vw, 62px); line-height: 1.1;">
+        Soluciones para <span class="italic text-brand-accent">recuperar tu privacidad.</span>
+      </h1>
+      <p class="mt-5 text-[17px] max-w-[540px]" style="color: rgba(255,255,255,0.65);">
+        Cada caso es diferente. Analizamos el tuyo y aplicamos la estrategia más efectiva.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-surface" style="padding: 80px 0 110px;">
+    <div class="container-wide space-y-16">
+
+      <!-- Eliminación -->
+      <div>
+        <div class="eyebrow mb-2">Eliminación de contenido</div>
+        <h2 class="font-serif text-ink mb-8" style="font-size: clamp(26px, 3vw, 38px); line-height: 1.15;">
+          Borramos lo que no debería <span class="italic text-brand">estar ahí.</span>
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {eliminacion.map((s, i) => (
+            <a href={`/servicios/${s.slug}`} class="group card card-hover block relative overflow-hidden">
+              <div class="absolute top-0 left-0 h-[3px] w-0 bg-brand-accent transition-all duration-500 group-hover:w-full"></div>
+              <div class="text-[11px] font-semibold text-brand-accent/70 tracking-[0.1em] uppercase mb-3">— {String(i+1).padStart(2,'0')}</div>
+              <h3 class="font-serif font-medium text-[20px] text-ink mb-2 leading-[1.2]">{s.nombre}</h3>
+              <p class="text-ink-muted text-[13.5px] leading-[1.65] mb-4">{s.descripcionCorta}</p>
+              <span class="text-brand text-[13px] font-semibold inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                Ver servicio <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Reputación -->
+      <div>
+        <div class="eyebrow mb-2">Reputación online</div>
+        <h2 class="font-serif text-ink mb-8" style="font-size: clamp(26px, 3vw, 38px); line-height: 1.15;">
+          Controlamos lo que dicen <span class="italic text-brand">de ti en internet.</span>
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {reputacion.map((s, i) => (
+            <a href={`/servicios/${s.slug}`} class="group card card-hover block relative overflow-hidden">
+              <div class="absolute top-0 left-0 h-[3px] w-0 bg-brand-accent transition-all duration-500 group-hover:w-full"></div>
+              <div class="text-[11px] font-semibold text-brand-accent/70 tracking-[0.1em] uppercase mb-3">— {String(i+1).padStart(2,'0')}</div>
+              <h3 class="font-serif font-medium text-[20px] text-ink mb-2 leading-[1.2]">{s.nombre}</h3>
+              <p class="text-ink-muted text-[13.5px] leading-[1.65] mb-4">{s.descripcionCorta}</p>
+              <span class="text-brand text-[13px] font-semibold inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                Ver servicio <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+  <WhatsAppFloat />
+</BaseLayout>

@@ -1,0 +1,235 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopBar from '@/components/TopBar.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+import { SERVICIOS } from '@/lib/config';
+
+export function getStaticPaths() {
+  return SERVICIOS.map((s) => ({ params: { slug: s.slug }, props: { servicio: s } }));
+}
+
+const { servicio } = Astro.props;
+
+type Detalle = { intro: string; cuando: string[]; beneficios: string[]; proceso: string[] };
+
+const detalles: Record<string, Detalle> = {
+  'eliminar-url-google': {
+    intro: 'Un enlace en Google puede condicionar cómo te perciben profesionalmente, socialmente o personalmente. Lo gestionamos con la vía más adecuada: formulario de eliminación, desindexación técnica o derecho al olvido.',
+    cuando: ['Apareces en resultados que no deberían existir', 'Una URL muestra tus datos personales sin consentimiento', 'Un enlace desactualizado daña tu imagen actual'],
+    beneficios: ['Análisis previo gratuito de viabilidad', 'Solicitud fundamentada ante Google', 'Seguimiento hasta resolución', 'Monitorización de reaparición'],
+    proceso: ['Identificamos la URL y su origen', 'Determinamos la vía legal correcta', 'Presentamos la solicitud documentada', 'Verificamos la eliminación y vigilamos'],
+  },
+  'derecho-al-olvido': {
+    intro: 'El RGPD reconoce tu derecho a solicitar que Google retire información personal que ya no tiene relevancia o que vulnera tu privacidad. Lo ejercemos con argumentación sólida y documentada.',
+    cuando: ['Información antigua que ya no te representa', 'Datos personales expuestos sin justificación', 'Contenido que afecta a tu vida laboral o personal'],
+    beneficios: ['Base legal sólida bajo el RGPD', 'Argumentación técnica y jurídica', 'Aplicable en toda la Unión Europea', 'Alta tasa de aceptación con solicitudes bien fundamentadas'],
+    proceso: ['Evaluamos si aplica el derecho al olvido', 'Redactamos la solicitud con argumentación legal', 'La presentamos ante Google y seguimos su estado', 'Confirmamos la retirada de los resultados'],
+  },
+  'borrar-datos-internet': {
+    intro: 'Nombre, apellidos, DNI, dirección, teléfono... Si tus datos personales están expuestos sin tu consentimiento en directorios, foros o webs, tienes derecho a que se eliminen.',
+    cuando: ['Tus datos aparecen en directorios o bases de datos online', 'Información privada está publicada sin permiso', 'Tu información es usada por terceros sin consentimiento'],
+    beneficios: ['Identificación de todas las fuentes de exposición', 'Solicitudes simultáneas a múltiples plataformas', 'Gestión del formulario de Google para datos personales', 'Informe final con evidencias de eliminación'],
+    proceso: ['Rastreo completo de tu información en la red', 'Priorización por impacto y urgencia', 'Solicitudes a webmasters, Google y plataformas', 'Verificación y entrega de informe'],
+  },
+  'eliminar-noticias-google': {
+    intro: 'Una noticia vieja puede seguir en los primeros resultados durante años. Si vulnera tu privacidad, contiene errores o ya no es relevante, existen vías legales y técnicas para actuar.',
+    cuando: ['Una noticia antigua aparece al buscar tu nombre', 'El artículo contiene información incorrecta', 'La publicación afecta tu reputación actual'],
+    beneficios: ['Contacto directo con los medios para corrección o retirada', 'Solicitud de desindexación a Google', 'Estrategia de desplazamiento si la retirada no es posible', 'Asesoramiento sobre acciones legales si procede'],
+    proceso: ['Analizamos el artículo y su impacto', 'Identificamos la vía más efectiva', 'Contactamos al medio o presentamos solicitud a Google', 'Gestionamos el resultado y monitorizamos'],
+  },
+  'eliminar-fotos-internet': {
+    intro: 'Una fotografía publicada sin tu consentimiento puede causar daños graves. Actuamos para retirarla de Google Imágenes, redes sociales, foros y cualquier web donde aparezca.',
+    cuando: ['Fotos íntimas publicadas sin tu consentimiento', 'Imágenes antiguas que dañan tu reputación actual', 'Fotos que aparecen en Google sin tu permiso'],
+    beneficios: ['Solicitud DMCA y copyright cuando aplica', 'Denuncia ante plataformas (Google, Instagram, Facebook...)', 'Contacto con webmasters para retirada en origen', 'Desindexación en buscadores si persiste'],
+    proceso: ['Identificamos todas las fuentes donde aparece la imagen', 'Determinamos la vía legal más efectiva (DMCA, privacidad, RGPD)', 'Presentamos solicitudes simultáneas', 'Verificamos la retirada completa'],
+  },
+  'eliminar-videos-internet': {
+    intro: 'Un vídeo viral o íntimo puede ser devastador. Actuamos con urgencia para retirarlo de YouTube, redes sociales y cualquier plataforma donde esté alojado.',
+    cuando: ['Vídeo íntimo publicado sin consentimiento (revenge porn)', 'Grabación no autorizada en circulación', 'Vídeo que daña tu reputación personal o profesional'],
+    beneficios: ['Actuación urgente en casos graves', 'Solicitud de retirada a YouTube, TikTok, Instagram...', 'Denuncia legal cuando hay infracción penal', 'Seguimiento en plataformas para evitar resubidas'],
+    proceso: ['Evaluamos urgencia y plataformas afectadas', 'Presentamos solicitudes de retirada urgente', 'Coordinamos denuncia legal si procede', 'Monitorizamos para evitar que reaparezca'],
+  },
+  'eliminar-resenas-negativas': {
+    intro: 'Una reseña falsa o injusta puede destruir años de trabajo. Las plataformas tienen procesos para denunciarlas, pero hay que saber presentar el caso correctamente para que actúen.',
+    cuando: ['Reseñas de personas que nunca fueron clientes', 'Valoraciones que incumplen las políticas de la plataforma', 'Campañas coordinadas de reseñas negativas'],
+    beneficios: ['Denuncia fundamentada ante Google, Trustpilot, TripAdvisor...', 'Documentación de evidencias de falsedad', 'Estrategia de respuesta y reputación paralela', 'Asesoramiento legal si hay injurias'],
+    proceso: ['Identificamos el tipo de reseña y la plataforma', 'Recopilamos evidencias de infracción de políticas', 'Presentamos la denuncia correctamente documentada', 'Seguimiento hasta la resolución'],
+  },
+  'eliminar-perfil-falso': {
+    intro: 'Un perfil falso que suplanta tu identidad puede arruinar tu reputación y engañar a tus contactos. Actuamos para denunciarlo y retirarlo de cualquier red o plataforma.',
+    cuando: ['Alguien ha creado un perfil con tu nombre y foto', 'Un perfil falso publica contenido dañino en tu nombre', 'Detectas suplantación de identidad en redes sociales'],
+    beneficios: ['Denuncia ante la plataforma con evidencias sólidas', 'Coordinación con las autoridades si hay delito', 'Retirada en todas las plataformas donde aparezca', 'Estrategia preventiva para evitar futuras suplantaciones'],
+    proceso: ['Documentamos la suplantación con capturas y evidencias', 'Presentamos denuncia ante la plataforma', 'Valoramos denuncia penal si el daño es grave', 'Seguimiento hasta la eliminación total'],
+  },
+  'borrar-huella-digital': {
+    intro: 'Tu huella digital es todo lo que existe sobre ti en internet: perfiles, comentarios, fotos, datos en directorios... Hacemos un análisis completo y eliminamos lo que no quieres que esté.',
+    cuando: ['Quieres saber exactamente qué información existe sobre ti', 'Necesitas reducir tu exposición digital por motivos de seguridad', 'Cambias de etapa vital o profesional y quieres empezar limpio'],
+    beneficios: ['Auditoría completa de tu presencia digital', 'Informe detallado con todo lo encontrado', 'Plan de eliminación priorizado', 'Eliminación sistemática en todas las fuentes'],
+    proceso: ['Rastreo exhaustivo en buscadores, directorios y redes', 'Entrega de informe con todo lo encontrado', 'Ejecución del plan de borrado acordado', 'Verificación final y recomendaciones preventivas'],
+  },
+  'eliminar-foros-google': {
+    intro: 'Un comentario antiguo en un foro puede aparecer en los primeros resultados de Google durante años. Actuamos para retirarlo en origen o desindexarlo de los buscadores.',
+    cuando: ['Un hilo de foro con tu nombre aparece en Google', 'Hay comentarios falsos o difamatorios sobre ti en foros', 'Información privada fue publicada en un foro sin tu permiso'],
+    beneficios: ['Contacto directo con administradores del foro', 'Solicitud de desindexación a Google si no se retira en origen', 'Base legal bajo RGPD para datos personales', 'Alternativa de desplazamiento SEO si persiste'],
+    proceso: ['Identificamos el foro y su administración', 'Solicitamos la retirada alegando la causa legal pertinente', 'Si no responden, solicitamos desindexación a Google', 'Verificamos que el hilo ya no aparece en resultados'],
+  },
+  'eliminar-documentos-google': {
+    intro: 'Sentencias judiciales, sanciones, boletines oficiales... documentos que aparecen en Google y afectan tu reputación. Existen vías legales para desindexarlos o anonimizarlos.',
+    cuando: ['Una sentencia judicial aparece al buscar tu nombre', 'Tu empresa aparece en el BOE con información negativa', 'Un documento oficial desactualizado daña tu imagen actual'],
+    beneficios: ['Análisis de viabilidad legal específica para documentos oficiales', 'Solicitud de anonimización ante organismos competentes', 'Petición de desindexación a Google cuando procede', 'Coordinación con abogados especializados si se requiere'],
+    proceso: ['Identificamos el documento y su fuente oficial', 'Valoramos la vía legal: anonimización, supresión o desindexación', 'Presentamos la solicitud ante el organismo o Google', 'Seguimiento hasta la resolución'],
+  },
+  'limpiar-reputacion-online': {
+    intro: 'Cuando no es posible eliminar el contenido, la estrategia es desplazarlo. Creamos y posicionamos contenido nuevo, veraz y positivo que empuja lo negativo hacia abajo en Google.',
+    cuando: ['Hay contenido negativo que no puede borrarse legalmente', 'Quieres reforzar tu imagen digital de forma proactiva', 'Tu empresa necesita recuperar confianza tras una crisis'],
+    beneficios: ['Estrategia SEO reputacional personalizada', 'Creación de contenido de autoridad', 'Gestión de perfiles y redes', 'Resultados visibles en 30–60 días'],
+    proceso: ['Auditoría completa de tu presencia digital', 'Plan de contenidos y plataformas clave', 'Ejecución y posicionamiento', 'Seguimiento mensual de resultados'],
+  },
+  'crisis-reputacion-online': {
+    intro: 'Cuando una crisis empieza a escalar en Google, medios o redes sociales, cada hora cuenta. Activamos protocolos urgentes para contener el daño y recuperar el control de la narrativa.',
+    cuando: ['Una noticia negativa se está propagando rápidamente', 'Tu marca está siendo atacada de forma coordinada', 'Una situación personal o profesional se está viralizando'],
+    beneficios: ['Respuesta urgente en menos de 24 horas', 'Protocolo de contención de daños inmediato', 'Coordinación de comunicación y eliminación de contenido', 'Plan de recuperación reputacional a medio plazo'],
+    proceso: ['Evaluación urgente del alcance de la crisis', 'Activación del protocolo de contención', 'Ejecución simultánea de acciones legales, técnicas y comunicativas', 'Monitorización continua y ajuste de estrategia'],
+  },
+  'reputacion-directivos': {
+    intro: 'Los directivos, fundadores y personas con alta exposición pública son objetivos frecuentes de ataques reputacionales. Gestionamos su presencia digital con discreción y estrategia.',
+    cuando: ['Aparece información negativa al buscar tu nombre como directivo', 'Necesitas controlar lo que dicen de ti en medios y redes', 'Quieres blindar tu imagen antes de una operación o nombramiento importante'],
+    beneficios: ['Análisis personalizado de presencia digital', 'Estrategia de autoridad y narrativa positiva', 'Gestión discreta de contenido negativo', 'Monitorización permanente de menciones'],
+    proceso: ['Auditoría completa de resultados por nombre y cargo', 'Identificación de riesgos y oportunidades', 'Ejecución de estrategia de eliminación y construcción', 'Informe mensual de evolución'],
+  },
+  'reputacion-inteligencia-artificial': {
+    intro: 'ChatGPT, Gemini, Perplexity y otros modelos de IA ya forman opinión sobre personas y empresas. Si lo que dicen sobre ti es incorrecto, desactualizado o dañino, podemos trabajar para corregirlo.',
+    cuando: ['ChatGPT u otras IAs muestran información incorrecta sobre ti', 'Los AI Overviews de Google generan respuestas negativas', 'Quieres controlar la narrativa en el ecosistema de IA'],
+    beneficios: ['Análisis de lo que dicen las principales IAs sobre ti', 'Identificación de fuentes que alimentan esa información', 'Estrategia para corregir señales y mejorar la narrativa', 'Monitorización de cambios en respuestas de IA'],
+    proceso: ['Auditamos qué dicen las IAs principales sobre ti o tu empresa', 'Identificamos las fuentes que alimentan esas respuestas', 'Trabajamos las fuentes para corregir la información', 'Medimos la evolución de las respuestas generadas'],
+  },
+  'desposicionamiento-web': {
+    intro: 'Cuando un contenido negativo no puede eliminarse directamente, la solución es desplazarlo. Creamos y posicionamos activos digitales que ocupen las primeras posiciones y releguen lo negativo.',
+    cuando: ['Hay contenido negativo en primera página de Google que no puede borrarse', 'Quieres reducir la visibilidad de resultados dañinos sin litigios', 'Necesitas una estrategia SEO para recuperar el control de tu nombre'],
+    beneficios: ['Estrategia SEO reputacional con activos propios', 'Creación de perfiles, artículos y contenidos de autoridad', 'Posicionamiento de resultados positivos y neutros', 'Medición continua de posiciones en Google'],
+    proceso: ['Análisis de los resultados actuales y su posicionamiento', 'Diseño de la arquitectura de activos digitales a posicionar', 'Creación y publicación de contenidos de autoridad', 'Seguimiento mensual de posiciones hasta lograr el objetivo'],
+  },
+};
+
+const detalle = detalles[servicio.slug];
+const otrosServicios = SERVICIOS.filter((s) => s.slug !== servicio.slug && s.grupo === servicio.grupo).slice(0, 3);
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: servicio.nombre,
+  description: servicio.descripcionCorta,
+  provider: { '@type': 'Organization', name: 'Eliminarlos', url: 'https://eliminarlos.com' },
+  serviceType: servicio.keyword,
+  areaServed: { '@type': 'Country', name: 'España' },
+  url: `https://eliminarlos.com/servicios/${servicio.slug}`,
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio',   item: 'https://eliminarlos.com' },
+    { '@type': 'ListItem', position: 2, name: 'Servicios',item: 'https://eliminarlos.com/servicios' },
+    { '@type': 'ListItem', position: 3, name: servicio.nombre, item: `https://eliminarlos.com/servicios/${servicio.slug}` },
+  ],
+};
+---
+
+<BaseLayout title={servicio.nombre} description={servicio.descripcionCorta} schemaType="service" schemas={[serviceSchema, breadcrumbSchema]}>
+  <TopBar />
+  <Header />
+
+  <section class="bg-ink text-white" style="padding: 110px 0 80px;">
+    <div class="container-wide">
+      <nav class="text-[12px] mb-7 flex items-center gap-2" style="color: rgba(255,255,255,0.4);">
+        <a href="/" class="hover:text-brand-accent transition-colors">Inicio</a>
+        <span>/</span>
+        <a href="/servicios" class="hover:text-brand-accent transition-colors">Servicios</a>
+        <span>/</span>
+        <span style="color: rgba(255,255,255,0.75);">{servicio.nombre}</span>
+      </nav>
+      <div class="eyebrow">Servicio especializado</div>
+      <h1 class="font-serif font-normal text-white max-w-[720px]" style="font-size: clamp(36px, 5vw, 60px); line-height: 1.1;">
+        {servicio.nombre}
+      </h1>
+      <p class="mt-5 text-[17px] max-w-[580px]" style="color: rgba(255,255,255,0.65);">{detalle.intro}</p>
+    </div>
+  </section>
+
+  <section class="bg-surface" style="padding: 80px 0 110px;">
+    <div class="container-tight">
+      <div class="grid md:grid-cols-2 gap-10 mb-14">
+        <div>
+          <div class="eyebrow">Cuándo aplica</div>
+          <h2 class="font-serif text-ink mb-5" style="font-size: 26px;">¿Es tu caso?</h2>
+          <ul class="space-y-3">
+            {detalle.cuando.map((item) => (
+              <li class="flex items-start gap-3 text-[15px] text-ink-muted">
+                <svg class="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div class="eyebrow">Qué incluye</div>
+          <h2 class="font-serif text-ink mb-5" style="font-size: 26px;">Lo que hacemos</h2>
+          <ul class="space-y-3">
+            {detalle.beneficios.map((item) => (
+              <li class="flex items-start gap-3 text-[15px] text-ink-muted">
+                <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white border border-ink/[0.07] rounded-xl p-10 mb-12">
+        <div class="eyebrow">Proceso</div>
+        <h2 class="font-serif text-ink mb-8" style="font-size: 26px;">Paso a paso</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {detalle.proceso.map((paso, i) => (
+            <div>
+              <div class="font-serif text-[38px] font-medium leading-none mb-3" style="color: rgba(168,255,62,0.25);">{String(i+1).padStart(2,'0')}</div>
+              <p class="text-[14px] text-ink-muted leading-[1.65]">{paso}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="bg-ink text-white rounded-xl p-12 text-center">
+        <h3 class="font-serif text-[28px] mb-3">¿Es tu caso?</h3>
+        <p class="text-[15px] mb-7 max-w-[400px] mx-auto" style="color: rgba(255,255,255,0.6);">
+          Análisis gratuito, confidencial y sin compromiso. Te respondemos en menos de 24 horas.
+        </p>
+        <a href="/contacto" class="btn btn-primary">Consulta gratis</a>
+      </div>
+    </div>
+  </section>
+
+  {otrosServicios.length > 0 && (
+    <section class="bg-white border-t border-ink/[0.07]" style="padding: 70px 0;">
+      <div class="container-wide">
+        <h3 class="font-serif text-ink mb-7" style="font-size: 24px;">Servicios relacionados</h3>
+        <div class="grid md:grid-cols-3 gap-5">
+          {otrosServicios.map((s) => (
+            <a href={`/servicios/${s.slug}`} class="group card card-hover block">
+              <h4 class="font-serif text-[19px] text-ink mb-2">{s.nombre}</h4>
+              <p class="text-ink-muted text-[13.5px] leading-[1.65] mb-4">{s.descripcionCorta}</p>
+              <span class="text-brand text-[13px] font-semibold inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                Ver más <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Footer />
+  <WhatsAppFloat />
+</BaseLayout>

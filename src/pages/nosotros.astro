@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopBar from '@/components/TopBar.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+---
+
+<BaseLayout
+  title="Quiénes somos"
+  description="Somos un equipo de abogados, técnicos SEO y especialistas en privacidad digital dedicados a eliminar información dañina de internet."
+>
+  <TopBar />
+  <Header />
+
+  <section class="bg-ink text-white" style="padding: 110px 0 90px;">
+    <div class="container-wide">
+      <div class="eyebrow">Quiénes somos</div>
+      <h1 class="font-serif font-normal text-white max-w-[680px]" style="font-size: clamp(38px, 5vw, 62px); line-height: 1.1;">
+        Ayudamos a personas y empresas a <span class="italic text-brand-accent">recuperar su privacidad.</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="bg-surface" style="padding: 90px 0 110px;">
+    <div class="container-tight">
+      <div class="prose-custom mb-16 max-w-[680px]">
+        <p class="text-[18px] leading-[1.8] text-ink mb-6">
+          Nacimos de una necesidad real: las personas y empresas afectadas por contenido dañino en internet no tenían a quién acudir con garantías. Los formularios de Google son confusos, los abogados generalistas no conocen el entorno digital y las agencias de reputación prometen sin cumplir.
+        </p>
+        <p class="text-[16px] leading-[1.8] text-ink-muted">
+          Formamos un equipo multidisciplinar: abogados especializados en protección de datos y RGPD, técnicos con conocimiento profundo del funcionamiento de Google, y estrategas de reputación digital. Trabajamos juntos en cada caso para aplicar la vía más efectiva, legal y duradera.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+        {[
+          { title: 'Honestidad ante todo', text: 'Si tu caso no tiene solución viable, te lo decimos. No cobraremos por promesas imposibles.' },
+          { title: 'Equipo real, no automatizaciones', text: 'Cada solicitud la redacta y gestiona una persona. No usamos bots ni plantillas genéricas.' },
+          { title: 'Resultados o no pagas', text: 'Trabajamos con garantía. Si no resolvemos el objetivo acordado, no cobras por lo no resuelto.' },
+        ].map((v) => (
+          <div class="card border-l-[3px] border-brand-accent">
+            <h3 class="font-serif text-[20px] text-ink mb-3">{v.title}</h3>
+            <p class="text-ink-muted text-[14.5px] leading-[1.7]">{v.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="bg-ink text-white rounded-xl p-12 text-center">
+        <h2 class="font-serif text-[30px] mb-4">¿Hablamos de tu caso?</h2>
+        <p class="text-[15px] mb-8 max-w-[400px] mx-auto" style="color: rgba(255,255,255,0.65);">Consulta gratuita, confidencial y sin compromiso.</p>
+        <a href="/contacto" class="btn btn-primary">Contactar ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+  <WhatsAppFloat />
+</BaseLayout>

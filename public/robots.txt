@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eliminarlos.com/sitemap-index.xml

@@ -1,0 +1,114 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopBar from '@/components/TopBar.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+
+const faqs = [
+  {
+    cat: 'General',
+    items: [
+      { q: '¿Se puede eliminar cualquier contenido de internet?', a: 'No siempre. Algunos contenidos se eliminan directamente, otros se desindexan de Google y otros requieren estrategias de desplazamiento. Por eso analizamos cada caso antes de definir la estrategia y te decimos con honestidad qué es viable.' },
+      { q: '¿Cuánto tarda el proceso?', a: 'Depende del tipo de contenido y la plataforma. Solicitudes de datos personales ante Google pueden resolverse en días. Casos complejos como noticias en medios o documentos judiciales pueden llevar semanas o meses. Te damos un plazo realista desde el primer análisis.' },
+      { q: '¿Es legal lo que hacéis?', a: 'Sí, al 100%. Trabajamos exclusivamente con vías legales: RGPD, políticas de plataformas, comunicación con webmasters y formularios oficiales de Google. Nunca usamos técnicas que puedan perjudicarte legalmente.' },
+      { q: '¿Qué pasa si el contenido reaparece?', a: 'Incluimos monitorización continua en todos nuestros servicios. Si algo reaparece, lo detectamos y actuamos sin coste adicional.' },
+    ],
+  },
+  {
+    cat: 'Derecho al olvido',
+    items: [
+      { q: '¿Qué es el derecho al olvido?', a: 'Es el derecho reconocido por el RGPD que permite a ciudadanos europeos solicitar a Google que retire URLs con información personal irrelevante, desactualizada o que vulnera la privacidad. No borra el contenido de la web original, sino que lo desindexe de los buscadores.' },
+      { q: '¿Solo aplica en Europa?', a: 'El derecho al olvido bajo el RGPD aplica a ciudadanos de la Unión Europea. Para otras jurisdicciones existen vías equivalentes, como la CCPA en California o legislaciones locales de protección de datos.' },
+      { q: '¿Google siempre acepta las solicitudes?', a: 'No. Google evalúa cada solicitud y puede rechazarla si considera que el contenido tiene interés público o no vulnera ninguna norma. Una solicitud bien argumentada tiene significativamente más probabilidades de éxito que una genérica.' },
+    ],
+  },
+  {
+    cat: 'Reputación online',
+    items: [
+      { q: '¿Qué diferencia hay entre eliminar y desposicionar?', a: 'Eliminar significa retirar el contenido (de la web o de Google). Desposicionar significa que el contenido sigue existiendo pero ya no aparece en las primeras posiciones de Google, porque otros resultados más positivos lo superan.' },
+      { q: '¿Cuánto tarda en verse el efecto del desposicionamiento?', a: 'Los primeros cambios en Google suelen verse entre 30 y 90 días. El proceso completo puede llevar entre 3 y 6 meses dependiendo de la competencia del término y la autoridad del contenido negativo.' },
+      { q: '¿También gestionáis lo que aparece en IA como ChatGPT?', a: 'Sí. Analizamos qué información muestran las principales IAs sobre ti o tu empresa y trabajamos para corregir las fuentes que alimentan esas respuestas.' },
+    ],
+  },
+  {
+    cat: 'Precios y proceso',
+    items: [
+      { q: '¿Cuánto cuesta?', a: 'Cada caso es diferente y el precio depende del tipo de contenido, la plataforma y la complejidad. Hacemos siempre un análisis gratuito previo y te presentamos una propuesta clara antes de comenzar.' },
+      { q: '¿Qué pasa si no conseguís el resultado?', a: 'Trabajamos con garantía de resultado. Si no logramos el objetivo acordado, no cobras por lo no resuelto. Te lo explicamos en detalle antes de empezar.' },
+      { q: '¿Cómo empieza el proceso?', a: 'Cuéntanos tu caso por formulario, email o WhatsApp. En menos de 24 horas te respondemos con un análisis preliminar y te decimos qué opciones hay.' },
+    ],
+  },
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.flatMap((g) =>
+    g.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    }))
+  ),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://eliminarlos.com' },
+    { '@type': 'ListItem', position: 2, name: 'FAQ',    item: 'https://eliminarlos.com/faq' },
+  ],
+};
+---
+
+<BaseLayout
+  title="Preguntas frecuentes sobre eliminación de contenido y reputación online"
+  description="Resolvemos las dudas más habituales sobre eliminación de URLs, derecho al olvido, borrado de datos personales y gestión de reputación online."
+  schemas={[faqSchema, breadcrumbSchema]}
+>
+  <TopBar />
+  <Header />
+
+  <section class="bg-ink text-white" style="padding: 110px 0 80px;">
+    <div class="container-wide">
+      <div class="eyebrow">FAQ</div>
+      <h1 class="font-serif font-normal text-white max-w-[640px]" style="font-size: clamp(36px, 5vw, 60px); line-height: 1.1;">
+        Preguntas <span class="italic text-brand-accent">frecuentes.</span>
+      </h1>
+      <p class="mt-5 text-[16px] max-w-[500px]" style="color: rgba(255,255,255,0.6);">
+        Todo lo que necesitas saber antes de empezar. Si tu duda no está aquí, escríbenos.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-surface" style="padding: 80px 0 110px;">
+    <div class="container-tight space-y-14">
+      {faqs.map((grupo) => (
+        <div>
+          <div class="eyebrow">{grupo.cat}</div>
+          <div class="space-y-3">
+            {grupo.items.map((faq) => (
+              <details class="group bg-white border border-ink/[0.07] rounded-xl overflow-hidden">
+                <summary class="flex justify-between items-center px-7 py-5 cursor-pointer font-semibold text-[15px] text-ink list-none select-none">
+                  {faq.q}
+                  <svg class="w-5 h-5 text-ink-muted flex-shrink-0 ml-4 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </summary>
+                <div class="px-7 pb-6 text-ink-muted text-[15px] leading-[1.75]">{faq.a}</div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="bg-ink text-white rounded-xl p-12 text-center">
+        <h3 class="font-serif text-[28px] mb-3">¿Tienes otra duda?</h3>
+        <p class="text-[15px] mb-7 max-w-[380px] mx-auto" style="color: rgba(255,255,255,0.6);">Cuéntanos tu caso. Respondemos en menos de 24 horas.</p>
+        <a href="/contacto" class="btn btn-primary">Contactar ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+  <WhatsAppFloat />
+</BaseLayout>

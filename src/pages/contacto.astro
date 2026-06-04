@@ -1,0 +1,120 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopBar from '@/components/TopBar.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFloat from '@/components/WhatsAppFloat.astro';
+import { SITE } from '@/lib/config';
+---
+
+<BaseLayout
+  title="Contacto — Consulta gratis"
+  description="Cuéntanos tu caso. Analizamos gratis y de forma confidencial qué se puede hacer para eliminar tu información de internet."
+>
+  <TopBar />
+  <Header />
+
+  <section class="bg-ink text-white" style="padding: 110px 0 80px;">
+    <div class="container-wide">
+      <div class="eyebrow">Contacto</div>
+      <h1 class="font-serif font-normal text-white max-w-[620px]" style="font-size: clamp(38px, 5vw, 62px); line-height: 1.1;">
+        Cuéntanos tu caso.<br/><span class="italic text-brand-accent">Lo analizamos gratis.</span>
+      </h1>
+      <p class="mt-5 text-[16px]" style="color: rgba(255,255,255,0.6);">
+        Sin compromiso · Respuesta en menos de 24 horas · 100% confidencial
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-surface" style="padding: 80px 0 110px;">
+    <div class="container-wide">
+      <div class="grid lg:grid-cols-[1fr_420px] gap-14">
+        <!-- Formulario -->
+        <div class="bg-white border border-ink/[0.07] rounded-xl p-10">
+          <h2 class="font-serif text-[26px] text-ink mb-7">Envíanos tu consulta</h2>
+          <form class="space-y-5" name="contacto" method="POST" data-netlify="true">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-[13px] font-semibold text-ink mb-2 uppercase tracking-[0.06em]">Nombre</label>
+                <input type="text" name="nombre" required placeholder="Tu nombre"
+                  class="w-full border border-ink/[0.12] rounded-lg px-4 py-3 text-[15px] text-ink focus:outline-none focus:border-brand-accent transition-colors" />
+              </div>
+              <div>
+                <label class="block text-[13px] font-semibold text-ink mb-2 uppercase tracking-[0.06em]">Email</label>
+                <input type="email" name="email" required placeholder="tu@email.com"
+                  class="w-full border border-ink/[0.12] rounded-lg px-4 py-3 text-[15px] text-ink focus:outline-none focus:border-brand-accent transition-colors" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-[13px] font-semibold text-ink mb-2 uppercase tracking-[0.06em]">Teléfono (opcional)</label>
+              <input type="tel" name="telefono" placeholder="+34 600 000 000"
+                class="w-full border border-ink/[0.12] rounded-lg px-4 py-3 text-[15px] text-ink focus:outline-none focus:border-brand-accent transition-colors" />
+            </div>
+            <div>
+              <label class="block text-[13px] font-semibold text-ink mb-2 uppercase tracking-[0.06em]">Servicio de interés</label>
+              <select name="servicio" class="w-full border border-ink/[0.12] rounded-lg px-4 py-3 text-[15px] text-ink focus:outline-none focus:border-brand-accent transition-colors bg-white">
+                <option value="">Selecciona un servicio…</option>
+                <option>Eliminar URL de Google</option>
+                <option>Derecho al olvido</option>
+                <option>Limpiar reputación online</option>
+                <option>Borrar datos de internet</option>
+                <option>Eliminar noticias de Google</option>
+                <option>Eliminar reseñas negativas</option>
+                <option>No estoy seguro / Necesito asesoría</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[13px] font-semibold text-ink mb-2 uppercase tracking-[0.06em]">Cuéntanos tu caso</label>
+              <textarea name="mensaje" rows="5" required placeholder="Describe brevemente qué aparece, en qué plataforma y cómo te afecta..."
+                class="w-full border border-ink/[0.12] rounded-lg px-4 py-3 text-[15px] text-ink focus:outline-none focus:border-brand-accent transition-colors resize-none"></textarea>
+            </div>
+            <div class="flex items-start gap-3">
+              <input type="checkbox" id="privacidad" name="privacidad" required class="mt-1 accent-brand-accent" />
+              <label for="privacidad" class="text-[13px] text-ink-muted">
+                He leído y acepto la <a href="/legal/privacidad" class="text-brand underline">política de privacidad</a>. Entiendo que mi información se tratará de forma confidencial.
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary w-full justify-center text-[15px] py-4">
+              Enviar consulta
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Info lateral -->
+        <div class="space-y-6">
+          <div class="bg-white border border-ink/[0.07] rounded-xl p-7">
+            <h3 class="font-serif text-[20px] text-ink mb-5">Contacto directo</h3>
+            <div class="space-y-4 text-[14.5px]">
+              <a href={SITE.contact.phoneHref} class="flex items-center gap-3 text-ink-muted hover:text-brand transition-colors">
+                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                {SITE.contact.phone}
+              </a>
+              <a href={`mailto:${SITE.contact.email}`} class="flex items-center gap-3 text-ink-muted hover:text-brand transition-colors">
+                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                {SITE.contact.email}
+              </a>
+              <a href={SITE.social.whatsapp} target="_blank" rel="noopener" class="flex items-center gap-3 text-ink-muted hover:text-brand transition-colors">
+                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-brand-darker text-white rounded-xl p-7">
+            <h3 class="font-serif text-[19px] mb-4">¿Qué pasa cuando escribes?</h3>
+            <ol class="space-y-3 text-[14px]" style="color: rgba(255,255,255,0.7);">
+              <li class="flex gap-3"><span class="text-brand-accent font-bold flex-shrink-0">1.</span> Revisamos tu caso en menos de 24h</li>
+              <li class="flex gap-3"><span class="text-brand-accent font-bold flex-shrink-0">2.</span> Te decimos si es viable y qué opciones hay</li>
+              <li class="flex gap-3"><span class="text-brand-accent font-bold flex-shrink-0">3.</span> Si decides avanzar, trazamos la estrategia</li>
+              <li class="flex gap-3"><span class="text-brand-accent font-bold flex-shrink-0">4.</span> Ejecutamos y te mantenemos informado</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+  <WhatsAppFloat />
+</BaseLayout>

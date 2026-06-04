@@ -1,0 +1,57 @@
+---
+import { NAV_LINKS, SITE } from '@/lib/config';
+const path = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-ink/[0.07]">
+  <nav class="container-wide">
+    <div class="flex justify-between items-center py-4">
+      <a href="/" class="font-serif font-medium text-[22px] text-ink tracking-tight">
+        <span class="text-brand-accent">e</span>liminarlos
+      </a>
+
+      <ul class="hidden lg:flex gap-8 items-center list-none">
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "text-[14px] font-medium transition-colors hover:text-brand relative",
+                "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-brand-accent after:transition-all hover:after:w-full",
+                { 'text-brand after:w-full': path === link.href }
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href="/contacto" class="btn btn-primary text-[13.5px] px-5 py-2.5">
+            Consulta gratis
+          </a>
+        </li>
+      </ul>
+
+      <button id="mob-btn" class="lg:hidden p-2" aria-label="Menú">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mob-menu" class="lg:hidden hidden pb-6 border-t border-ink/[0.07] pt-4">
+      <ul class="flex flex-col gap-4 list-none">
+        {NAV_LINKS.map((link) => (
+          <li><a href={link.href} class="block py-1.5 text-[15px] font-medium hover:text-brand">{link.label}</a></li>
+        ))}
+        <li><a href="/contacto" class="btn btn-primary w-full justify-center mt-2">Consulta gratis</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.getElementById('mob-btn')?.addEventListener('click', () => {
+    document.getElementById('mob-menu')?.classList.toggle('hidden');
+  });
+</script>
