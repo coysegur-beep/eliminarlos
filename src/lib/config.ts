@@ -7,7 +7,7 @@ export const SITE = {
   name: 'Eliminarlos',
   shortName: 'Eliminarlos',
   domain: 'eliminarlos.com',
-  url: 'https://eliminarlos.com',
+  url: 'https://eliminarlos.org',
   description: 'Eliminamos tu información de Google e internet. Derecho al olvido, gestión de reputación online y borrado de datos personales con métodos 100% legales.',
   locale: 'es-ES',
   language: 'es',

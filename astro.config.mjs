@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://eliminarlos.com',
+  site: 'https://eliminarlos.org',
   trailingSlash: 'never',
   build: {
     format: 'directory',

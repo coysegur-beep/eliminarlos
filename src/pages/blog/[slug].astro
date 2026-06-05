@@ -21,18 +21,18 @@ const articleSchema = {
   description: post.data.description,
   datePublished: post.data.publishDate.toISOString(),
   dateModified: (post.data.modifiedDate || post.data.publishDate).toISOString(),
-  author: { '@type': 'Organization', name: 'Eliminarlos', url: 'https://eliminarlos.com' },
-  publisher: { '@type': 'Organization', name: 'Eliminarlos', url: 'https://eliminarlos.com' },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': `https://eliminarlos.com/blog/${post.slug}` },
+  author: { '@type': 'Organization', name: 'Eliminarlos', url: 'https://eliminarlos.org' },
+  publisher: { '@type': 'Organization', name: 'Eliminarlos', url: 'https://eliminarlos.org' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `https://eliminarlos.org/blog/${post.slug}` },
 };
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://eliminarlos.com' },
-    { '@type': 'ListItem', position: 2, name: 'Blog',   item: 'https://eliminarlos.com/blog' },
-    { '@type': 'ListItem', position: 3, name: post.data.title, item: `https://eliminarlos.com/blog/${post.slug}` },
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://eliminarlos.org' },
+    { '@type': 'ListItem', position: 2, name: 'Blog',   item: 'https://eliminarlos.org/blog' },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: `https://eliminarlos.org/blog/${post.slug}` },
   ],
 };
 ---
