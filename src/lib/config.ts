@@ -23,7 +23,7 @@ export const SITE = {
 
   social: {
     instagram: 'https://www.instagram.com/eliminarlos',
-    whatsapp: 'https://wa.me/34600000000',
+    whatsapp: 'https://wa.me/573028680235',
   },
 };
 
