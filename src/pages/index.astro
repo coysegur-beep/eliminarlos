@@ -129,7 +129,7 @@ const faqs = [
         {SERVICIOS.map((s, i) => (
           <a href={`/servicios/${s.slug}`} class="group card card-hover block relative overflow-hidden">
             <div class="absolute top-0 left-0 h-[3px] w-0 bg-brand-accent transition-all duration-500 group-hover:w-full"></div>
-            <div class="text-[12px] font-semibold text-brand-accent/70 tracking-[0.1em] uppercase mb-4 font-sans">— {String(i+1).padStart(2,'0')}</div>
+            <div class="text-[12px] font-semibold text-brand tracking-[0.1em] uppercase mb-4 font-sans">— {String(i+1).padStart(2,'0')}</div>
             <h3 class="font-serif font-medium text-[22px] text-ink mb-3 leading-[1.2]">{s.nombre}</h3>
             <p class="text-ink-muted text-[14.5px] leading-[1.7] mb-5">{s.descripcionCorta}</p>
             <span class="text-brand text-[13px] font-semibold inline-flex items-center gap-2 transition-all group-hover:gap-3">
@@ -194,7 +194,7 @@ const faqs = [
               <div class="flex items-start gap-4">
                 <svg class="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 <div>
-                  <h4 class="font-sans font-semibold text-[15px] text-white mb-1">{item.title}</h4>
+                  <p class="font-sans font-semibold text-[15px] text-white mb-1">{item.title}</p>
                   <p class="text-[14px] leading-[1.65]" style="color: rgba(255,255,255,0.55);">{item.text}</p>
                 </div>
               </div>
