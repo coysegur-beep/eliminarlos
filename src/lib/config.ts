@@ -16,8 +16,8 @@ export const SITE = {
   contact: {
     phone: '+34 900 000 000',
     phoneHref: 'tel:+34900000000',
-    whatsapp: '+34 600 000 000',
-    whatsappLink: 'https://wa.me/34600000000',
+    whatsapp: '+57 302 868 0235',
+    whatsappLink: 'https://wa.me/573028680235',
     email: 'hola@eliminarlos.com',
   },
 
