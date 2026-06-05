@@ -36,11 +36,13 @@
   }
 
   .eyebrow {
-    @apply text-brand-accent text-[12px] font-semibold uppercase tracking-[0.18em] mb-4 flex items-center gap-3;
+    @apply text-[12px] font-semibold uppercase tracking-[0.18em] mb-4 flex items-center gap-3;
+    color: #4ADE80;
   }
   .eyebrow::before {
     content: '';
-    @apply w-6 h-px bg-brand-accent;
+    @apply w-6 h-px;
+    background-color: #4ADE80;
   }
 
   .card {

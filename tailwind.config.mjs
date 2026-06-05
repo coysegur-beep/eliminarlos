@@ -9,7 +9,7 @@ export default {
           dark: '#125C38',
           darker: '#0A3D25',
           light: '#22A060',
-          accent: '#A8FF3E',       // verde lima eléctrico — único en el nicho
+          accent: '#4ADE80',       // verde esmeralda suave — consistente con logo
         },
         ink: {
           DEFAULT: '#0A0E14',
@@ -37,8 +37,8 @@ export default {
       },
       keyframes: {
         pulseSoft: {
-          '0%, 100%': { opacity: '1', boxShadow: '0 0 0 0 rgba(168, 255, 62, 0.5)' },
-          '50%': { opacity: '0.8', boxShadow: '0 0 0 10px rgba(168, 255, 62, 0)' },
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 0 0 rgba(74, 222, 128, 0.5)' },
+          '50%': { opacity: '0.8', boxShadow: '0 0 0 10px rgba(74, 222, 128, 0)' },
         },
         fadeUp: {
           '0%': { opacity: '0', transform: 'translateY(18px)' },
