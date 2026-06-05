@@ -14,8 +14,8 @@ export const SITE = {
   founded: 2020,
 
   contact: {
-    phone: '+34 900 000 000',
-    phoneHref: 'tel:+34900000000',
+    phone: '+57 302 868 0235',
+    phoneHref: 'tel:+573028680235',
     whatsapp: '+57 302 868 0235',
     whatsappLink: 'https://wa.me/573028680235',
     email: 'hola@eliminarlos.com',
