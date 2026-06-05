@@ -1,5 +1,5 @@
 ---
-title: "Qué es el derecho al olvido y cómo ejercerlo en España"
+title: "Qué es el derecho al olvido y cómo ejercerlo"
 description: "El derecho al olvido te permite pedir a Google que retire información personal desactualizada o irrelevante. Explicamos qué es, cuándo aplica y cómo funciona el proceso."
 publishDate: 2026-01-15
 author: "Equipo Eliminarlos"
