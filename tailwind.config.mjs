@@ -14,8 +14,8 @@ export default {
         ink: {
           DEFAULT: '#0A0E14',
           soft: '#141B25',
-          muted: '#6B7A8D',
-          light: '#A8B4C2',
+          muted: '#4B5563',   // oscurecido para pasar contraste WCAG AA
+          light: '#6B7A8D',
         },
         surface: {
           DEFAULT: '#F8F9FA',
